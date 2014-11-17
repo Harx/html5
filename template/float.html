@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>float</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: red;
+        }
+        html,body{
+            border: none;
+        }
+        body{
+            padding: 10px;
+        }
+        .fl{
+            float: left;
+            height: 100px;
+            width: 50px;
+            border: 1px solid lawnGreen;
+        }
+        .fr{
+            float: right;
+            height: 50px;
+            border: 1px solid yellow;
+        }
+        .clear{
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+   <h1>Float with Block Element & with Inline Element</h1>
+    <div class="fl">1:Tag DIV float left</div>
+    <a class="clear">2:Tag A content flow</a>
+    <div class="fr">3:Tag DIV float right</div>
+    <a href="" class="fl">4:Tag A float left</a>
+    <div class="">5:Tag DIV content flow. </div>
+    <div class="fl">6:Tag DIV float left</div>
+    <a href="">7:Tag A content flow</a>
+    <div class="fl">8:Tag DIV float left</div>
+</body>
+</html>

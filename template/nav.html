@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    <style type="text/css">
+        ul{
+            display: block;
+            padding: 0px;
+            margin: 0px;            
+            border: 1px solid black;
+        }
+        ul>li{
+/*            display: block;*/
+            list-style-type: square;
+            list-style-position: inside;
+            border: 1px solid black;
+        }
+        ul>li a{
+            text-decoration: none;
+            display: block;
+            padding: 5px;
+            background: lawnGreen;
+        }
+        ul>li a:hover{
+            color: white;
+            background-color: steelblue;
+        }
+/*horizontal*/
+        #navH ul{
+            width: 960px;
+            margin: auto;
+        }
+        #navH ul>li{
+            float: left;
+            margin: 0px 2px;
+/*            position: relative;*/
+        }
+        #navH ul:after{
+            display: table;
+            content: "";
+            clear: both;
+        }        
+        #navH li ol{
+            display: none;
+            margin: 0px;
+            padding: 0px;
+            position: absolute;
+            background-color: white;
+            border: 1px solid black;
+/*            width: 100px;*/
+        }
+        #navH li:hover ol{
+            display: block;
+        }
+/*vertical        */
+        #navV ul{
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navH">
+        <h1>Horizontal Nav</h1>
+        <ul>
+            <li>
+                <a href="">item1</a>
+                <ol>
+                   <li><a href="">sub1</a></li>
+                   <li><a href="">sub2</a></li>
+                   <li><a href="">sub3</a></li>
+                   <li><a href="">sub4</a></li>
+                   <li><a href="">sub5</a></li>
+                </ol>
+            </li>
+            <li><a href="">item2</a></li>
+            <li><a href="">item3</a></li>
+            <li><a href="">item4</a></li>
+            <li><a href="">item5</a></li>
+        </ul>
+    </div>
+    <hr>
+    <div id="navV">
+        <h1>Vertical Nav</h1>
+        <ul>
+            <li><a href="">item1</a></li>
+            <li><a href="">item2</a></li>
+            <li><a href="">item3</a></li>
+            <li><a href="">item4</a></li>
+            <li><a href="">item5</a></li>
+        </ul>
+    </div>
+</body>
+</html>

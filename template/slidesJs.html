@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Slideshow</title>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery.slides.js"></script>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        .wrapper{
+            width: 500px;
+            border: 1px solid #000;
+        }
+        #slideshow {
+            /*            display: none;*/
+        }
+        .slidesjs-navigation {
+            float: left;
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px 5px 0 0;
+        }
+        .slidesjs-pagination {
+            margin: 5px 0 0;
+            float: right;
+            list-style: none;
+        }
+        .slidesjs-pagination li {
+            float: left;
+            margin: 0 4px;
+        }
+        .slidesjs-pagination li a {
+            display: block;
+            width: 13px;
+            height: 0px;
+            padding-top: 13px;
+            background-color: red;
+            /*            float: left;*/
+            overflow: hidden;
+            -webkit-border-radius: 13px;
+            -moz-border-radius: 13px;
+            -ms-border-radius: 13px;
+            -o-border-radius: 13px;
+            border-radius: 13px;
+        }
+        .slidesjs-pagination li a.active,
+        .slidesjs-pagination li a:hover.active {
+            background-color: green;
+        }
+        .slidesjs-pagination li a:hover {
+            background-color: yellow;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('#slideshow').slidesjs({
+                width: 1280,//其实这两个值是用来指定宽高比的。实际的宽度根据外层而决定。
+                height: 800,
+//                navigation:false,
+                navigation: {
+                    active: false,
+                    effect: 'fade'
+                },
+                effect: {
+                    slide: {
+                        speed: 200 //ms                        
+                    },
+                    fade: {
+                        speed: 300,
+                        crossfade: true
+                    }
+                },
+                callback: {
+                    loaded: function (number) {
+                        // Do something awesome!
+                        // Passes start slide number
+                    },
+                    start: function (number) {
+                        // Do something awesome!
+                        // Passes slide number at start of animation
+                    },
+                    complete: function (number) {
+                        // Do something awesome!
+                        // Passes slide number at end of animation
+                    }
+                },
+                play: {
+                    active: true,
+                    // [boolean] Generate the play and stop buttons.
+                    // You cannot use your own buttons. Sorry.
+                    effect: "slide",
+                    // [string] Can be either "slide" or "fade".
+                    interval: 5000,
+                    // [number] Time spent on each slide in milliseconds.
+                    auto: false,
+                    // [boolean] Start playing the slideshow on load.
+                    swap: true,
+                    // [boolean] show/hide stop and play buttons
+                    pauseOnHover: false,
+                    // [boolean] pause a playing slideshow on hover
+                    restartDelay: 2500
+                    // [number] restart delay on inactive slideshow
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="slideshow">
+            <img src="../resource/1.jpg" alt="">
+            <img src="../resource/2.jpg" alt="">
+            <img src="../resource/3.jpg" alt="">
+            <img src="../resource/4.jpg" alt="">
+            <a href="" class="slidesjs-navigation slidesjs-previous">Prev</a>
+            <a href="" class="slidesjs-navigation slidesjs-next">Next</a>
+        </div>
+    </div>
+</body>
+
+</html>
