@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slideshow</title>
+    <style>
+        img{
+            display: block;
+            max-width: 100%;
+            height: 100px;
+            margin: 0px auto;
+        }
+        #slideshow{
+            width: 500px;
+            height: 300px;
+            position: relative;
+/*            overflow: hidden;*/
+            border: 1px solid black;
+        }
+        #slideImg{
+            position: relative;
+        }
+        .slide{
+            width: 100%;
+            float: left;
+            border: 1px solid lawngreen;
+        }
+        .slide img{
+            
+
+        }
+    </style>
+</head>
+<body onload="slide()">
+    <div id="slideshow">
+        <div id="slideImg">
+           <div class="slide"><img src="../resource/1.jpg" alt=""></div>
+           <div class="slide"><img src="../resource/2.jpg" alt=""></div>
+           <div class="slide"><img src="../resource/3.jpg" alt=""></div>
+           <div class="slide"><img src="../resource/4.jpg" alt=""></div>
+        </div>
+        <div id="slideNum">
+            <ul>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var slide=function(){
+            
+            var slideshow=document.getElementById('slideshow');
+//            slideshow.style.width='300px';
+            var w=slideshow.style.width,
+                h=slideshow.style.height;
+//            alert(slideshow.style[0]);
+            var slideImgs=document.getElementById('slideImg');        
+            var arrSlide=slideImgs.getElementsByTagName('div');
+            slideImgs.style.width=w*arrSlide.length;
+            slideImgs.style.height=h;
+            slideImgs.style.left='-100px';
+        }
+    </script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 //------------Tool functions----------------
 String.prototype.capitalize=function(){
     if(this==="") return this;
@@ -8,9 +9,10 @@ String.prototype.capitalize=function(){
 //--------------List data---------------
 var arrItems = [
     "float",
-    "nav",
+    "nav",//https://support.mozilla.org/zh-CN/?icn=tabz
     "slideshow",
-    'slidesJs'
+    'slidesJs',
+    'jumbotron'//http://www.imooc.com/activity/zhaopin
         ]
 //------------- add <a> to #list---------
 var list = document.getElementById('list');
