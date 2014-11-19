@@ -1,0 +1,153 @@
+/*
+-----------------------------------------default-body*/
+header {
+    width: 100%;
+/*    position: fixed;*/
+/*    top: 0px;*/
+/*    left: 0px;*/
+    background-color: #dee7ee;
+    height: auto;
+    border-top: 2px solid white;
+    border-bottom: 1px solid ##b3b8bc;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    
+}
+header .wrapper {
+    margin: 0 auto;
+    width: 1080px;
+    position: relative;
+}
+header nav ul {
+    float: right;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    float: left;
+    margin: auto 10px;
+    
+}
+header nav ul li a{
+    font-size: 12px;
+    color: #333;
+    display: block;
+    height: 42px;
+    line-height: 40px;
+    padding: 0 12px;
+    text-decoration: none;
+}
+header nav ul li a:hover{
+    background-color: white;
+}
+header h1{
+    float: left;
+}
+header form {
+    float: right;
+    position: relative;
+    margin-top: 20px;
+}
+header form input[type="input"] {
+    border: 0;
+    height: 18px;
+    line-height: 16px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    border-radius: 30px;
+    -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,.5);
+    box-shadow: inset hoff voff blur color;
+    padding: 6px 42px 6px 20px;
+}
+header form button{
+    width: 50px;
+    height: 26px;
+    padding-left: 6px;
+    border: 0;
+    border-left: 1px solid rgba(0,0,0,.5);
+    background-color: #fff;
+    position: absolute;
+    top:2px;
+    right:15px;
+    cursor: pointer;
+
+}
+header .wrapper>a {
+    color: #333;
+    float: right;
+    display: block;
+    background-color: #fff;
+    height: 44px;
+    width: 150px;
+    line-height: 42px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-border-bottom-left-radius: 22px;
+    -moz-border-bottom-left-radius: 22px;
+    -ms-border-bottom-left-radius: 22px;
+    -o-border-bottom-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    -webkit-border-bottom-right-radius: 22px;
+    -moz-border-bottom-right-radius: 22px;
+    -ms-border-bottom-right-radius: 22px;
+    -o-border-bottom-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+}
+
+/*
+------------------------------------scroll-body*/
+body.scrolled{
+    padding-top: 153px;
+}
+body.scrolled header{
+    height: 42px;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    padding-bottom: 0;
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,.2);
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
+    
+}
+body.scrolled header .wrapper>a{
+    display: none;
+}
+body.scrolled header nav ul{
+    margin-right: 300px;
+}
+body.scrolled header h1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+body.scrolled header form{
+    position: absolute;
+    top: 6px;
+    right: 0;
+    margin: 0;
+}
+
+
+/*
+--------------------------------------------content*/
+section{
+    height: 1000px;
+}
+
+/*
+---------------toTop*/
+#toTop{
+    color: #000;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    border: 1px solid #000;
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+}

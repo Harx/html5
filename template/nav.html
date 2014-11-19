@@ -1,94 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Navigation</title>
-    <style type="text/css">
-        ul{
-            display: block;
-            padding: 0px;
-            margin: 0px;            
-            border: 1px solid black;
-        }
-        ul>li{
-/*            display: block;*/
-            list-style-type: square;
-            list-style-position: inside;
-            border: 1px solid black;
-        }
-        ul>li a{
-            text-decoration: none;
-            display: block;
-            padding: 5px;
-            background: lawnGreen;
-        }
-        ul>li a:hover{
-            color: white;
-            background-color: steelblue;
-        }
-/*horizontal*/
-        #navH ul{
-            width: 960px;
-            margin: auto;
-        }
-        #navH ul>li{
-            float: left;
-            margin: 0px 2px;
-/*            position: relative;*/
-        }
-        #navH ul:after{
-            display: table;
-            content: "";
-            clear: both;
-        }        
-        #navH li ol{
-            display: none;
-            margin: 0px;
-            padding: 0px;
-            position: absolute;
-            background-color: white;
-            border: 1px solid black;
-/*            width: 100px;*/
-        }
-        #navH li:hover ol{
-            display: block;
-        }
-/*vertical        */
-        #navV ul{
-            width: 100px;
-        }
-    </style>
+    <meta name="description" content="Navigation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
 </head>
+
 <body>
-    <div id="navH">
-        <h1>Horizontal Nav</h1>
-        <ul>
-            <li>
-                <a href="">item1</a>
-                <ol>
-                   <li><a href="">sub1</a></li>
-                   <li><a href="">sub2</a></li>
-                   <li><a href="">sub3</a></li>
-                   <li><a href="">sub4</a></li>
-                   <li><a href="">sub5</a></li>
-                </ol>
-            </li>
-            <li><a href="">item2</a></li>
-            <li><a href="">item3</a></li>
-            <li><a href="">item4</a></li>
-            <li><a href="">item5</a></li>
-        </ul>
-    </div>
-    <hr>
-    <div id="navV">
-        <h1>Vertical Nav</h1>
-        <ul>
-            <li><a href="">item1</a></li>
-            <li><a href="">item2</a></li>
-            <li><a href="">item3</a></li>
-            <li><a href="">item4</a></li>
-            <li><a href="">item5</a></li>
-        </ul>
-    </div>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <header>
+        <div class="wrapper">
+            <a href="">click me!</a>
+            <nav class="clearfix">
+                <ul>
+                    <li><a href="#">首页</a>
+                    </li>
+                    <li><a href="#">下载</a>
+                    </li>
+                    <li><a href="#">关于</a>
+                    </li>
+                    <li><a href="#">帮助</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="clearfix">
+                <h1>Navigation</h1>
+                <form action="">
+                    <input type="input" placeholder="type sth.">
+                    <button type="submit">search</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div id="navV">
+            <h1>Vertical Nav</h1>
+            <ul>
+                <li><a href="">item1</a>
+                </li>
+                <li><a href="">item2</a>
+                </li>
+                <li><a href="">item3</a>
+                </li>
+                <li><a href="">item4</a>
+                </li>
+                <li><a href="">item5</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <a href="javascript:;" id="toTop" class="hidden">Top</a>
+    
+    
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script>
+        window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')
+    </script>
+    <script src="../js/plugins.js"></script>
+    <script src="../js/nav.js"></script>
 </body>
+
 </html>
