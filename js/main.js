@@ -10,6 +10,7 @@ String.prototype.capitalize=function(){
 var arrItems = [
     "float",
     "nav",//https://support.mozilla.org/zh-CN/?icn=tabz
+    'form',
     "slideshow",
     'slidesJs',
     'jumbotron'//http://www.imooc.com/activity/zhaopin
