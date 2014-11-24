@@ -11,6 +11,7 @@ var arrItems = [
     "float",
     "nav",//https://support.mozilla.org/zh-CN/?icn=tabz
     'form',
+    'table',
     "slideshow",
     'slidesJs',
     'jumbotron'//http://www.imooc.com/activity/zhaopin

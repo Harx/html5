@@ -1,0 +1,48 @@
+
+.wrapper {
+    width: 960px;
+    margin: auto;
+    padding: 20px;
+}
+.today{
+    background-color: red;
+}
+col{
+    border-left: 1px solid #fff;
+    background-color: pink;
+}
+col:first-child {
+    border-left-width: 0px;    
+    background-color: lightgreen;
+}
+col.last{
+    background-color: lightgreen;
+}
+
+thead {
+    background-color: lightblue;
+}
+tfoot{
+    background-color: lightblue;
+}
+
+tbody {
+/*    background-color: lightgreen;*/
+}
+
+td{
+    padding: 10px 20px;
+}
+th:hover,td:hover{
+    background-color: red;
+}
+
+table {
+    color:white;
+    text-align: center;
+    width: 200px;
+}
+
+caption {
+    background-color: orange;
+}
