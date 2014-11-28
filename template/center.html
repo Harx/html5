@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        ul{
+            margin: 0;
+            padding: 0;   
+        }
+        .text-center {
+            text-align: center;
+        }
+        .block-center {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #000;
+        }
+        ul.inline-center {
+            list-style: none;
+            text-align: center;
+        }
+        ul.inline-center li {
+            display: inline;
+        }
+        .table-center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        ul.relative-center {
+            float: left;
+            position: relative;
+            right: -50%;
+            border: 1px solid lightblue;
+            list-style: none;
+        }
+        ul.relative-center li {
+            float: left;
+            position: relative;
+            left: -50%;
+            border: 1px solid #000;
+            padding: 10px;
+            margin-right: 5px;
+        }
+        .wrap {
+            border: 1px solid lightblue;
+            height: 120px;
+        }
+        .padding-middle {
+            height: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .line-height-middle {
+            line-height: 120px;
+        }
+        .cell-middle {
+            display: table-cell;
+            vertical-align: middle;
+            *position: relative;
+        }
+        .vertical-wrap {
+            *position: absolute;
+            *top: 50%;
+        }
+        .vertical {
+            border: 1px solid #000;
+            *position: relative;
+            *top: -50%;
+        }
+    </style>
+    <!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <!--    Horizontal Center-->
+    <!--    Horizontal Center-->
+    <h1>Horizontal Center</h1>
+    <hr>
+
+    <h2>Inline Element</h2>
+    <div class="text-center">text in center</div>
+
+    <h2>Block Element with certain width</h2>
+
+    <div class="block-center">block in center</div>
+
+    <h2>Uncertain width:Display Inline</h2>
+    <ul class="inline-center">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <h2>Uncertain width:TABLE</h2>
+    <table class="table-center">
+        <tr>
+            <td>
+                <div>div in a table center</div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Uncertain width:Relative Position</h2>
+    <ul class="relative-center">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+
+    <div class="clearfix"></div>
+
+
+    <!--    Vertical Center  -->
+    <!--    Vertical Center  -->
+
+    <h1>Vertical Center</h1>
+    <hr>
+
+    <h2>Uncertain hight Block</h2>
+    <div class="wrap padding-middle">margin middle</div>
+
+    <h2>Certain height One-line:Line Height</h2>
+    <div class="wrap line-height-middle">line-height equal height</div>
+
+    <h2>Certain height multiple-line:Table</h2>
+    <table class="wrap">
+        <tr>
+            <td>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Certain height with muliple-line:Display Table-cell</h2>
+    <div class="wrap cell-middle">
+        <div>division</div>
+        <div>division</div>
+        <div>division</div>
+    </div>
+
+    <h2>[IE6/7]Certain height with muliple-line:Relative Position</h2>
+    <div class="wrap cell-middle">
+        <div class="vertical-wrap">
+            <div class="vertical">
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+                <div>division</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script>
+        window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')
+    </script>
+    <script src="../js/plugins.js"></script>
+    <!--    <script src="../js/main.js"></script>-->
+</body>
+
+</html>
