@@ -3,9 +3,63 @@
     width: 960px;
     margin: 20px auto;
     padding: 20px;
-    border: 1px solid #000;
+    border: 1px solid #fff;
 }
 
 form {
-    border: 1px solid #000;
+    border: 1px solid blue;
+    padding: 20px;
 }
+
+
+
+fieldset {
+    padding: 20px;
+    margin: 20px auto;
+}
+
+input {
+    margin-right: 20px;
+}
+
+.key-num {
+    border: 1px solid #000;
+    background-color: #fff;
+    padding: 5px 10px;
+    margin-right: 1px;
+}
+input.key-num:hover{
+    color: white;
+    background-color: black;
+}
+
+.keyNum {
+    margin: 10px;
+}
+
+
+
+.basic p{
+/*    clear: both;*/
+/*    overflow: hidden;*/
+/*    vertical-align: middle;*/
+}
+.basic label{
+/*    float: left;*/
+    display: inline-block;
+    box-sizing: border-box;
+    height: 26px;
+    padding: 4px;
+    width: 100px;
+    text-align: right;
+}
+.basic input{
+    display: inline-block;
+    vertical-align:middle;
+/*    float: left;*/
+    height: 26px;
+    width: 50%;
+    padding: 2px;
+    margin: 0;
+}
+
