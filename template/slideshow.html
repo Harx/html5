@@ -1,67 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Slideshow</title>
     <style>
-        img{
-            display: block;
-            max-width: 100%;
-            height: 100px;
-            margin: 0px auto;
+        ul {
+            list-style: none;
         }
-        #slideshow{
-            width: 500px;
-            height: 300px;
-            position: relative;
-/*            overflow: hidden;*/
-            border: 1px solid black;
+        ul,
+        li {
+            padding: 0;
+            margin: 0;
         }
-        #slideImg{
+        #slide {
+            overflow: hidden;
             position: relative;
         }
-        .slide{
-            width: 100%;
+        .slide-content {
+            position: relative;
+        }
+        .slide-content li {
             float: left;
-            border: 1px solid lawngreen;
         }
-        .slide img{
-            
-
+        .slide-indicator {
+            position: absolute;
+            right: 0px;
+            bottom: 20px;
+        }
+        .slide-indicator li {
+            float: left;
+            margin-right: 20px;
+        }
+        .slide-indicator li.active a {
+            background-color: white;
+            color: darkblue;
+        }
+        .slide-indicator li a:hover {
+            background-color: blue;
+            color: yellow;
+        }
+        .slide-indicator li a {
+            text-decoration: none;
+            float: left;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            background-color: orange;
+            color: white;
+            text-align: center;
+        }
+        .prev,
+        .next {
+            position: absolute;
+            top: 40%;
+            border: 30px solid transparent;
+            opacity: 0.8;
+        }
+        .prev:hover {
+            border-right-color: blue;
+        }
+        .next:hover {
+            border-left-color: blue;
+        }
+        .prev {
+            left: -30px;
+            border-right: orange solid 30px;
+        }
+        .next {
+            right: -30px;
+            border-left: orange solid 30px;
         }
     </style>
 </head>
-<body onload="slide()">
-    <div id="slideshow">
-        <div id="slideImg">
-           <div class="slide"><img src="../resource/1.jpg" alt=""></div>
-           <div class="slide"><img src="../resource/2.jpg" alt=""></div>
-           <div class="slide"><img src="../resource/3.jpg" alt=""></div>
-           <div class="slide"><img src="../resource/4.jpg" alt=""></div>
-        </div>
-        <div id="slideNum">
-            <ul>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-            </ul>
-        </div>
+
+<body onload="initSlide()">
+    <div id="slide">
+        <ul class="slide-content">
+            <li class="slide">
+                <img src="../resource/1.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img src="../resource/2.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img src="../resource/3.jpg" alt="">
+            </li>
+            <li class="slide">
+                <img src="../resource/4.jpg" alt="">
+            </li>
+        </ul>
+        <ul class="slide-indicator">
+            <li class="active"><a href="javascript:;">1</a>
+            </li>
+            <li><a href="javascript:;">2</a>
+            </li>
+            <li><a href="javascript:;">3</a>
+            </li>
+            <li><a href="javascript:;">4</a>
+            </li>
+        </ul>
+        <a href="javascript:;"><span id="prev" class="prev"></span></a>
+        <a href="javascript:;"><span id="next" class="next"></span></a>
     </div>
     <script>
-        var slide=function(){
-            
-            var slideshow=document.getElementById('slideshow');
-//            slideshow.style.width='300px';
-            var w=slideshow.style.width,
-                h=slideshow.style.height;
-//            alert(slideshow.style[0]);
-            var slideImgs=document.getElementById('slideImg');        
-            var arrSlide=slideImgs.getElementsByTagName('div');
-            slideImgs.style.width=w*arrSlide.length;
-            slideImgs.style.height=h;
-            slideImgs.style.left='-100px';
+        /*----------------------------*/
+        /* 动画类*/
+        /* 构造函数*/
+        function Animate(config) {
+            this.target = config.target;
+            this.attribute = config.attribute;
+            this.startValue = config.startValue;
+            this.endValue = config.endValue;
+            this.effect = config.effect || "sin";
+            this.duration = config.duration || 300;
+            this.fps = 60;
+            this.interval = 1000 / 60;
+
+            this.run();
+        };
+        /* 原型*/
+        Animate.prototype = {
+            run: function () {
+                var startTime = new Date();
+                var self = this;
+                var timer = setInterval(function () {
+                    var curTime = new Date();
+                    var percent = (curTime - startTime) / self.duration;
+                    if (percent > 1) {
+                        self.target.style[self.attribute] = self.endValue + "px";
+                        clearInterval(timer);
+                    } else {
+                        percent = Animate.effect[self.effect](percent);
+                        self.target.style[self.attribute] = self.startValue + ((self.endValue - self.startValue) * percent) + "px";
+                    }
+                }, this.interval);
+            }
+        };
+        /* 类方法*/
+        Animate.effect = {
+            sin: function (percent) {
+                return Math.sin(Math.PI * 0.5 * percent);
+            }
+        };
+
+        /*-----------------------------*/
+        /* Slide类 */
+        /* 构造函数*/
+        function Slide(config) {
+            this.width = config.width || 400;
+            this.height = config.height || 300;
+            this.dom = document.getElementById(config.id);
+            this.dom = document.getElementById("slide");
+            this.slides = this.dom.getElementsByTagName("ul")[0];
+            this.indicators = this.dom.getElementsByTagName("ul")[1].getElementsByTagName("li");
+
+            this.imgCount = this.slides.getElementsByTagName("li").length;
+            this.curIndex = 0;
+            this.timer = null;
+
+            this.init(config);
+        };
+        /* 原型*/
+        Slide.prototype = {
+            init: function (config) {
+                this.initStyle();
+                this.initEvent();
+                this.startTimer();
+            },
+            initStyle: function () {
+                this.dom.style.overflow = "hidden";
+                this.dom.style.position = "relative";
+                this.dom.style.width = this.width + "px";
+                this.dom.style.height = this.height + "px";
+
+                this.slides.style.width = (this.width * this.imgCount) + "px";
+                this.slides.style.position = "relative";
+                this.slides.style.left = "0px";
+
+                var lis = this.slides.getElementsByTagName("li");
+                var i = 0,
+                    l = lis.length;
+                for (i; i < l; i++) {
+                    lis[i].style.float = "left";
+                    lis[i].style.fontSize = 0;
+                    var img = lis[i].getElementsByTagName("img")[0];
+                    img.style.width = this.width + "px";
+                    img.style.height = this.height + "px";
+                }
+            },
+            initEvent: function () {
+                var that = this;
+
+                /* indicators */
+                var i = 0,
+                    l = this.indicators.length;
+                for (i; i < l; i++) {
+                    (function (index, self) {
+                        self.indicators[index].getElementsByTagName("a")[0].onclick = function () {
+                            self.go(index);
+                        }
+                    })(i, this)
+                }
+
+                /* previous button */
+                document.getElementById("prev").onclick = function () {
+                    that.prev()
+                };
+                /* next button */
+                document.getElementById("next").onclick = this.next.bind(this);
+            },
+            go: function (index) {
+                if (index >= this.imgCount) {
+                    index = 0;
+                } else if (index <= -1) {
+                    index = 3;
+                }
+                this.stopTimer();
+                var start = parseInt(this.slides.style.left);
+                var offet = -index * this.width;
+                var animateSlide = new Animate({
+                    target: this.slides,
+                    attribute: "left",
+                    startValue: start,
+                    endValue: offet,
+                    duration: 500
+                });
+
+                this.curIndex = index;
+                this.active(index);
+                this.startTimer();
+            },
+            active: function (index) {
+                var i = 0,
+                    l = this.indicators.length;
+                for (i = 0; i < l; i++) {
+                    this.indicators[i].className = "";
+                }
+                this.indicators[index].className = "active";
+
+            },
+            prev: function () {
+                this.go(--this.curIndex);
+            },
+            next: function () {
+                this.go(++this.curIndex);
+            },
+            startTimer: function () {
+                var that = this;
+                this.timer = setInterval(function () {
+                    that.go(that.curIndex++);
+                }, 2000);
+            },
+            stopTimer: function () {
+                clearInterval(this.timer);
+            }
+        };
+
+        /*---------------------------*/
+        /* 入口*/
+        var initSlide = function () {
+            var slide = new Slide({
+                id: "slide",
+                width: document.body.clientWidth,
+                height: document.documentElement.clientHeight
+            });
         }
     </script>
 </body>
+
 </html>
