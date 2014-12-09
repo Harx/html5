@@ -56,7 +56,6 @@
 
     <!-- Add your site or application content here -->
 
-    <p>Hello world! This is HTML5 Boilerplate.</p>
     <div id="demo"></div>
 
     <table id="sortTable">
@@ -109,7 +108,10 @@
             var ths = table.getElementsByTagName("th");
             var tbody = table.getElementsByTagName("tbody")[0];
             var rows = tbody.getElementsByTagName("tr");
+            
+            //TODO ie678报错 object expected
             var rows = Array.prototype.slice.call(rows, 0);
+            
             var curCol = null;
 
             //执行排序，重新渲染
@@ -140,7 +142,7 @@
             for (var i = 0; i < ths.length; i++) {
                 (function (j) {
                     var isAscending = true;
-                    ths[j].addEventListener("click", function (event) {
+                    addListener(ths[j],"click", function () {
                         if (curCol != j) isAscending = true;
                         sort(j, isAscending);
                         isAscending = !isAscending;

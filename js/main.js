@@ -11,6 +11,7 @@ var arrItems = [
     "nav", //https://support.mozilla.org/zh-CN/?icn=tabz
     'form',
     'table',
+    'sortTable',
     "slideshow",
     'slidesJs',
     'center',

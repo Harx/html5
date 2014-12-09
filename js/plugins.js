@@ -1,5 +1,5 @@
 // Avoid `console` errors in browsers that lack a console.
-(function() {
+(function () {
     var method;
     var noop = function () {};
     var methods = [
@@ -22,3 +22,11 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+
+var addListener = function (element, type, handler) {
+    if (element.addEventListener) {
+        element.addEventListener(type, handler, false);
+    } else if (element.attachEvent || document.all) {
+        element.attachEvent("on" + type, handler);
+    }
+}
