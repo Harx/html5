@@ -17,34 +17,7 @@
 
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/main.css">
-    <style>
-        #demo {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            border: 2px solid #000;
-            background-color: #fff;
-        }
-        #demo:before,
-        #demo:after {
-            content: "";
-            position: absolute;
-            left: 100px;
-            top: 20px;
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
-            border-left-color: #000;
-        }
-        #demo:after {
-            left: 98px;
-            border-left-color: #fff;
-        }
-        th:hover{
-            cursor:pointer;
-        }
-        
-    </style>
+
     <!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
     <script src="../bower_components/modernizr/modernizr.js"></script>
 </head>
@@ -57,45 +30,6 @@
     <!-- Add your site or application content here -->
 
     <p>Hello world! This is HTML5 Boilerplate.</p>
-    <div id="demo"></div>
-
-    <table id="sortTable">
-        <thead>
-            <tr>
-
-                <th>姓名</th>
-                <th>力量</th>
-                <th>敏捷</th>
-                <th>智力</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>德鲁伊</td>
-                <td>17</td>
-                <td>24</td>
-                <td>13</td>
-            </tr>
-            <tr>
-                <td>月之骑士</td>
-                <td>15</td>
-                <td>22</td>
-                <td>16</td>
-            </tr>
-            <tr>
-                <td>众神之王</td>
-                <td>19</td>
-                <td>15</td>
-                <td>20</td>
-            </tr>
-            <tr>
-                <td>流浪剑客</td>
-                <td>23</td>
-                <td>15</td>
-                <td>14</td>
-            </tr>
-        </tbody>
-    </table>
 
     <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
     <script>
@@ -103,54 +37,6 @@
     </script>
     <script src="../js/plugins.js"></script>
     <!--    <script src="../js/main.js"></script>-->
-    <script>
-        var sortable = function (table) {
-            if (typeof table == "string") table = document.getElementById(table);
-            var ths = table.getElementsByTagName("th");
-            var tbody = table.getElementsByTagName("tbody")[0];
-            var rows = tbody.getElementsByTagName("tr");
-            var rows = Array.prototype.slice.call(rows, 0);
-            var curCol = null;
-
-            //执行排序，重新渲染
-            var sort = function (colIndex, isAscending) {
-                curCol = colIndex;
-                //根据所选择的当前列的值，默认升序排列rows
-                rows.sort(function (row1, row2) {
-                    var getValue = function (trow, colIndex) {
-                        var tdata = trow.getElementsByTagName("td")[colIndex];
-                        return tdata.textContent || innerText;
-                    }
-                    var td1 = getValue(row1, colIndex),
-                        td2 = getValue(row2, colIndex);
-                    return td1.localeCompare(td2);
-                });
-
-                //改为降序排列
-                if (!isAscending)
-                    rows.reverse();
-
-                //移动排列DOM
-                for (var i = 0; i < rows.length; i++) {
-                    tbody.appendChild(rows[i]);
-                }
-            };
-
-            //添加单击事件
-            for (var i = 0; i < ths.length; i++) {
-                (function (j) {
-                    var isAscending = true;
-                    ths[j].addEventListener("click", function (event) {
-                        if (curCol != j) isAscending = true;
-                        sort(j, isAscending);
-                        isAscending = !isAscending;
-                        console.log("click" + j);
-                    });
-                }(i));
-            }
-        }
-        sortable("sortTable");
-    </script>
 </body>
 
 </html>
