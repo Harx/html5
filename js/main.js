@@ -7,6 +7,8 @@ String.prototype.capitalize = function () {
 
 //--------------List data---------------
 var arrItems = [
+    "test",
+    "lagou",
     "float",
     "nav", //https://support.mozilla.org/zh-CN/?icn=tabz
     'form',

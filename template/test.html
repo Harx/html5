@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+        h1 {
+            color: #000;
+            font-size: 20px;
+            padding-left: 0.5em;
+            margin-top: 20px;
+            border-left: 5px solid steelblue;
+            border-top: 5px solid steelblue;
+        }
+        #demo {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #000;
+            background-color: #fff;
+        }
+        #demo:before,
+        #demo:after {
+            content: "";
+            position: absolute;
+            left: 100px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-left-color: #000;
+        }
+        #demo:after {
+            left: 98px;
+            border-left-color: #fff;
+        }
+        table {
+            border: 1px solid #000;
+        }
+        th {
+            padding: 5px;
+        }
+        th:hover {
+            cursor: pointer;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #efefef;
+        }
+        tbody td {
+            padding: 5px 20px;
+        }
+        .center {
+            width: 100px;
+            height: 100px;
+            float: left;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background-color: #0f0;
+            margin-left: -50px;
+            margin-top: -50px;
+        }
+        #ajax {
+            height: 50px;
+            overflow: hidden;
+        }
+    </style>
+    <!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
+    <script src="../bower_components/modernizr/modernizr.js"></script>
+    <script src="../bower_components/firebug-lite/build/firebug-lite.js"></script>
+    <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+    <script src="../js/plugins.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')
+    </script>
+    <!--    <script src="../js/main.js"></script>-->
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <a href="#down" name="up" id="idup">link To down by name</a>
+
+    <h1>center div <em>(the green block)</em></h1>
+    <div style="">
+        <p>当relative相对定位的top用百分比数值时，若父元素是body，当且仅当主动设置body的高度值（不再由内容auto来决定高度）时，body的height才不为0，定位才会生效。</p>
+        <p>可以通过如下代码实现设置高度:<code>html,body{height:100%}</code>
+        </p>
+    </div>
+    <div class="center"></div>
+
+    <h1>pseudo-element</h1>
+    <div id="demo"></div>
+
+    <h1>sortable Table</h1>
+    <table id="sortTable">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>力量</th>
+                <th>敏捷</th>
+                <th>智力</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>德鲁伊</td>
+                <td>17</td>
+                <td>24</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>月之骑士</td>
+                <td>15</td>
+                <td>22</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>众神之王</td>
+                <td>19</td>
+                <td>15</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>流浪剑客</td>
+                <td>23</td>
+                <td>15</td>
+                <td>14</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var sortable = function (table) {
+            if (typeof table == "string") table = document.getElementById(table);
+            var ths = table.getElementsByTagName("th");
+            var tbody = table.getElementsByTagName("tbody")[0];
+            var rows = tbody.getElementsByTagName("tr");
+            var rows = Array.prototype.slice.call(rows, 0);
+            var curCol = null;
+
+            //执行排序，重新渲染
+            var sort = function (colIndex, isAscending) {
+                curCol = colIndex;
+                //根据所选择的当前列的值，默认升序排列rows
+                rows.sort(function (row1, row2) {
+                    var getValue = function (trow, colIndex) {
+                        var tdata = trow.getElementsByTagName("td")[colIndex];
+                        return tdata.textContent || innerText;
+                    }
+                    var td1 = getValue(row1, colIndex),
+                        td2 = getValue(row2, colIndex);
+                    return td1.localeCompare(td2);
+                });
+
+                //改为降序排列
+                if (!isAscending)
+                    rows.reverse();
+
+                //移动排列DOM
+                for (var i = 0; i < rows.length; i++) {
+                    tbody.appendChild(rows[i]);
+                }
+            };
+
+            //添加单击事件
+            for (var i = 0; i < ths.length; i++) {
+                (function (j) {
+                    var isAscending = true;
+                    ths[j].addEventListener("click", function (event) {
+                        if (curCol != j) isAscending = true;
+                        sort(j, isAscending);
+                        isAscending = !isAscending;
+                        console.log("click" + j);
+                    });
+                }(i));
+            }
+        }
+        sortable("sortTable");
+    </script>
+
+    <h1>Timer</h1>
+    <div id="timer"></div>
+    <script>
+        var timer = document.getElementById("timer"),
+            s = "",
+            date = new Date();
+
+        setInterval(function () {
+            date = new Date();
+            s += date.getFullYear() + "Year ";
+            s += date.getMonth() + 1 + "Month ";
+            s += date.getDate() + "date ";
+            s += date.getHours() + "hours ";
+            s += date.getMinutes() + "minutes ";
+            s += date.getSeconds() < 10 ? "0" : "" + date.getSeconds() + "seconds";
+            if (document.all) {
+                timer.innerText = s;
+            } else {
+                timer.textContent = s;
+            }
+            s = "";
+        }, 50);
+    </script>
+
+    <h1>Ajax</h1>
+    <div id="ajax"></div>
+    <script>
+        var xmlhttp = createXHR(),
+            ajax = document.getElementById("ajax");
+         //dom元素的变量名一定要唯一，否则异步返回数据后，取得的变量名已不是期望的那个元素。
+        log(xmlhttp.open);
+        xmlhttp.open("get", "table.html");
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            log(xmlhttp.readyState);
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                //                log(xmlhttp.responseText);
+                if (document.all) {
+                    log("--innerText")
+                    ajax.innerText = xmlhttp.responseText;
+                } else {
+                    log("--textContent")
+                    ajax.textContent = xmlhttp.responseXML || xmlhttp.responseText;
+                }
+
+            }
+        }
+    </script>
+
+    <h1>limite input string Type</h1>
+    <div>
+        <label for="text">仅能响应数字和方向、退格键</label>
+        <input id="text" type="text" autocomplete="false">
+        <p>方向键、退格键无法通过返回false或preventDefalt拦截。</p>
+    </div>
+    <script>
+        var numOnly = document.getElementById("text");
+         //仅onkeypress有charcode，用来获得输入的字符
+        addListener(numOnly, "keypress", function (event) {
+            event = event || window.event;
+            var charcode = event.charCode || event.keyCode; //返回的是unicode编码
+            var keychar = String.fromCharCode(charcode);
+            console.log(keychar);
+            if (!(/\d/.test(keychar))) {
+                if (event.preventDefault) event.preventDefault();
+                if (event.returnValue) event.returnValue = false;
+                return false;
+            }
+            return true;
+        });
+    </script>
+
+    <h1>links & anchors</h1>
+    <div>
+        <a href="#up" name="down">link to up by name</a>
+        <a href="#idup">link to up by id</a>
+        <br />
+        <img src="" alt="This is a Img using map&area">
+        <map name="">
+            <area shape="" coords="" href="" alt="">
+        </map>
+
+        <a href="#demo">#demo</a>
+        <a href="#sortTable">#sortTable</a>
+        <a href="#timer">#timer</a>
+        <a href="#ajax">#ajax</a>
+    </div>
+    <script>
+        document.write("document.links.length: ");
+        document.write(document.links.length);
+        document.write("<br />");
+        document.write("document.anchors.length: ");
+        document.write(document.anchors.length);
+    </script>
+</body>
+
+</html>
