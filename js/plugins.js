@@ -1,7 +1,8 @@
 // Avoid `console` errors in browsers that lack a console.
 (function () {
     var method;
-    var noop = function () {};
+    var noop = function () {
+    };
     var methods = [
         'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
         'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
@@ -24,56 +25,71 @@
 // Place any jQuery/helper plugins in here.
 
 /*----------------------------兼容性*/
-function addListener(element, type, handler) {
+var addListener = function (element, type, handler) {
     if (element.addEventListener) {
-        element.addEventListener(type, handler, false);
+        addListener = function (element, type, handler) {
+            element.addEventListener(type, handler, false);
+        }
     } else if (element.attachEvent || document.all) {
-        element.attachEvent("on" + type, handler);
+        addListener = function (element, type, handler) {
+            element.attachEvent("on" + type, handler);
+        }
     }
-}
+    addListener(element, type, handler);
+};
 
-function createXHR() {
+var createXHR = function () {
     if (typeof XMLHttpRequest != "undefined") {
-        return new XMLHttpRequest();
+        createXHR = function () {
+            return new XMLHttpRequest();
+        }
     } else if (typeof ActiveXObject != "undefined") {
-        if (typeof arguments.callee.activeXString != "string") {
-            //Microsoft.XMLHttp用于win8，2000系统。
-            var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.5.0", "MSXML2.XMLHttp.4.0", "MSXML2.XMLHttp.3.0", "MSXML2.XMLHttp", "Microsoft.XMLHttp"],
-                i, len;
-            for (i = 0, len = versions.length; i < l; i++) {
-                try {
-                    new ActiveXObject(versions[i]);
-                    arguments.callee.activeXString = versions[i];
-                    break;
-                } catch (ex) {
-
+        var versions = [
+                //function () {
+                //    return new ActiveXObject("MSXML2.XMLHTTP.6.0");//IE6下创建成功，但是无法使用。
+                //},
+                function () {
+                    return new ActiveXObject("MSXML2.XMLHttp");
+                },
+                function () {
+                    return new ActiveXObject("Microsoft.XMLHttp");
                 }
+            ],
+            i, len;
+        for (i = 0, len = versions.length; i < len; i++) {
+            try {
+                versions[i]();
+                createXHR = versions[i];
+                break;
+            } catch (ex) {
             }
         }
-        log(arguments.callee.activeXString);
-        return new ActiveXObject(arguments.callee.activeXString);
     } else {
         throw new Error(" No XHR object avaliable.");
     }
-}
+    return createXHR();
+};
+
+var logNum = 0;
 
 function log(string) {
     var log = document.getElementById("console");
     if (!log) {
-        var log = document.createElement("div");
+        log = document.createElement("div");
         log.id = "console";
-        log.style.position = "absolute";
+        //log.style.cssText = "position:fixed;top:0px;right:0px;bottom:0px;width:300px;border:1px solid black;background:#dedede;padding:5px;";
+        log.style.position = "fixed";
         log.style.top = "0px";
         log.style.right = "0px";
         log.style.width = "300px";
         log.style.height = "500px";
-        log.style.boder = "1px solid black";
+        log.style.border = "1px solid black";
         log.style.background = "#dedede";
         log.style.padding = "5px";
-        log.style.overflow="hidden";
+        log.style.overflow = "hidden";
         document.body.appendChild(log);
     }
-    log.innerHTML += "<p>" + string + "</p>";
+    log.innerHTML += "<p>No." + (++logNum) + ":" + string + "</p>";
 }
 /* 动画类--------------------------------------------*/
 /* 构造函数*/
@@ -88,7 +104,7 @@ function Animate(config) {
     this.interval = 1000 / this.fps;
 
     this.run();
-};
+}
 /* 原型*/
 Animate.prototype = {
     run: function () {
