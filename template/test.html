@@ -12,7 +12,6 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="../css/normalize.css">
@@ -37,8 +36,8 @@
             border: 2px solid #000;
             background-color: #fff;
         }
-        #demo:before,
-        #demo:after {
+        #demo::before,
+        #demo::after {
             content: "";
             position: absolute;
             left: 100px;
@@ -48,23 +47,21 @@
             border: 10px solid transparent;
             border-left-color: #000;
         }
-        #demo:after {
+        #demo::after {
             left: 98px;
             border-left-color: #fff;
         }
-        table {
+        #sortTable table {
             border: 1px solid #000;
         }
-        th {
+        #sortTable th {
             padding: 5px;
-        }
-        th:hover {
             cursor: pointer;
         }
-        tbody tr:nth-child(odd) {
+        #sortTable tbody tr:nth-child(odd) {
             background-color: #efefef;
         }
-        tbody td {
+        #sortTable tbody td {
             padding: 5px 20px;
         }
         .center {
@@ -85,12 +82,12 @@
     </style>
     <!--    <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
     <script src="../bower_components/modernizr/modernizr.js"></script>
-    <script src="../bower_components/firebug-lite/build/firebug-lite.js"></script>
     <!--    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
     <script src="../js/plugins.js"></script>
     <script>
         window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.2.min.js"><\/script>')
     </script>
+    <script src="../js/vendor/json2.js"></script>
     <!--    <script src="../js/main.js"></script>-->
 </head>
 
@@ -155,7 +152,14 @@
             var ths = table.getElementsByTagName("th");
             var tbody = table.getElementsByTagName("tbody")[0];
             var rows = tbody.getElementsByTagName("tr");
-            var rows = Array.prototype.slice.call(rows, 0);
+            //            var rows = Array.prototype.slice.call(rows, 0);//ie8以下error。
+            //兼容ie6,7
+            var temArr = [];
+            for (var i = 0; i < rows.length; i++) {
+                temArr.push(rows[i]);
+            }
+            rows = temArr;
+
             var curCol = null;
 
             //执行排序，重新渲染
@@ -165,7 +169,7 @@
                 rows.sort(function (row1, row2) {
                     var getValue = function (trow, colIndex) {
                         var tdata = trow.getElementsByTagName("td")[colIndex];
-                        return tdata.textContent || innerText;
+                        return tdata.textContent || tdata.innerText;
                     }
                     var td1 = getValue(row1, colIndex),
                         td2 = getValue(row2, colIndex);
@@ -186,7 +190,13 @@
             for (var i = 0; i < ths.length; i++) {
                 (function (j) {
                     var isAscending = true;
-                    ths[j].addEventListener("click", function (event) {
+                    //                    ths[j].addEventListener("click", function (event) {
+                    //                        if (curCol != j) isAscending = true;
+                    //                        sort(j, isAscending);
+                    //                        isAscending = !isAscending;
+                    //                        console.log("click" + j);
+                    //                    });
+                    addListener(ths[j], "click", function (event) {
                         if (curCol != j) isAscending = true;
                         sort(j, isAscending);
                         isAscending = !isAscending;
@@ -227,29 +237,25 @@
     <script>
         var xmlhttp = createXHR(),
             ajax = document.getElementById("ajax");
-         //dom元素的变量名一定要唯一，否则异步返回数据后，取得的变量名已不是期望的那个元素。
-        log(xmlhttp.open);
-        xmlhttp.open("get", "table.html");
-        xmlhttp.send();
+        //dom元素的变量名一定要唯一，否则异步返回数据后，取得的变量名已不是期望的那个元素。
+//            log("xml Obj:" + JSON.stringify(xmlhttp));//IE7下JSON方法报错，不明。
+        xmlhttp.open("get", "../humans.txt");
         xmlhttp.onreadystatechange = function () {
             log(xmlhttp.readyState);
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                //                log(xmlhttp.responseText);
                 if (document.all) {
-                    log("--innerText")
                     ajax.innerText = xmlhttp.responseText;
                 } else {
-                    log("--textContent")
                     ajax.textContent = xmlhttp.responseXML || xmlhttp.responseText;
                 }
-
             }
-        }
+        };
+        xmlhttp.send(); //IE6下必须最后，否则readystatechange事件无效。
     </script>
 
     <h1>limite input string Type</h1>
     <div>
-        <label for="text">仅能响应数字和方向、退格键</label>
+        <label for="text">只能输入数字。仅能响应数字和方向、退格键；复制粘贴同样不行。</label>
         <input id="text" type="text" autocomplete="false">
         <p>方向键、退格键无法通过返回false或preventDefalt拦截。</p>
     </div>
@@ -268,6 +274,13 @@
             }
             return true;
         });
+        addListener(numOnly,"change",function(event){
+            console.log(numOnly.value);
+            if (!(/\d/.test(numOnly.value))) {
+                alert("only numbers!");
+                numOnly.value="";
+            }
+        })
     </script>
 
     <h1>links & anchors</h1>
@@ -292,6 +305,93 @@
         document.write("document.anchors.length: ");
         document.write(document.anchors.length);
     </script>
+
+    <h1 id="size">Client Rect</h1>
+    <script>
+        var dr = function (method) {
+            document.write("<br />document" + method + ":" + document.documentElement[method]);
+        };
+        document.write("window.innerHeight" + window.innerHeight);
+        document.write("<br />window.innerWidth" + window.innerWidth);
+        dr("offsetHeight");
+        dr("offsetWidth");
+        dr("clientHeight");
+        dr("clientWidth");
+        dr("scrollHeight");
+        dr("scrollWidth");
+
+        var rect = document.documentElement.getBoundingClientRect();
+        document.write("<br />documentBoundingClientRect:" + JSON.stringify(rect));
+
+        console.log(rect);
+
+        var rect = document.getElementById("size").getBoundingClientRect();
+        document.write("<br />documentBoundingClientRect:" + JSON.stringify(rect));
+        console.log(rect);
+    </script>
+
+    <h1>rapid sort</h1>
+    <script>
+        /* 
+            会删除原数组元素
+            返回一个新数组
+            */
+        var rapidSort = function (arr) {
+            if (arr.length <= 1) {
+                return arr;
+            }
+            var mid = Math.floor(arr.length / 2);
+            //            var midValue=arr[mid];
+            var midValue = arr.splice(mid, 1);
+            var left = [],
+                right = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] < midValue[0]) {
+                    left.push(arr[i])
+                } else {
+                    right.push(arr[i]);
+                }
+            }
+            return (arguments.callee(left)).concat(midValue, arguments.callee(right));
+        };
+
+        var popSort = function (arr) {
+            var temp = 0;
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        };
+        var arr = [23, 125543, 64574, 632, 423, 432, 423, 4, 23, 4, 2, 423, 4, 2, 3, 12, 5, 6, 6, 23, 4, 7, 9, 8, 76, 12];
+        document.write(JSON.stringify(arr));
+        document.write("<br />");
+        var start, end;
+
+        start = new Date;
+        document.write(JSON.stringify(rapidSort(arr)));
+        end = new Date;
+        document.write("<br />");
+        document.write("rapid sort's time cost:" + (end - start) + "ms");
+
+        var arr = [23, 125543, 64574, 632, 423, 432, 423, 4, 23, 4, 2, 423, 4, 2, 3, 12, 5, 6, 6, 23, 4, 7, 9, 8, 76, 12];
+        document.write("<br />");
+        start = new Date;
+        document.write(JSON.stringify(popSort(arr)));
+        end = new Date;
+        document.write("<br />");
+        document.write("pop sort's time cost:" + (end - start) + "ms");
+    </script>
+
+    <!--[if lt IE 9]>
+    <!--<script src="../js/vendor/ie7-js/IE9.js">IE7_PNG_SUFFIX=".png";</script>-->
+    <script src="../js/vendor/ie7-js/IE9.js"></script>
+    <![endif]-->
 </body>
 
 </html>
