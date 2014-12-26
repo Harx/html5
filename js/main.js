@@ -20,13 +20,18 @@ var arrItems = [
     'jumbotron' //http://www.imooc.com/activity/zhaopin
         ]
     //------------- add <a> to #list---------
-var list = document.getElementById('list');
+var date1=new Date;
 var i = 0,
-    l = arrItems.length;
+    l = arrItems.length,
+    fragment = document.createDocumentFragment();
 for (i; i < l; i++) {
     var id = arrItems[i];
     var a = document.createElement("a");
     a.href = "template/" + id + ".html";
     a.innerHTML = id.capitalize();
-    list.appendChild(a);
+    fragment.appendChild(a);
 }
+var list = document.getElementById('list');
+list.appendChild(fragment);
+var date2=new Date;
+console.log("cost time:"+(date2-date1));
