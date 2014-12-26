@@ -1,0 +1,269 @@
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a,a:visited,a:link,a:hover,a:active{
+    text-decoration: none;
+    color: black;
+    
+}
+header {
+    min-width: 1024px;
+    height: 60px;
+    background-color: #fafafa;
+    border-top: 3px solid  #019875;
+}
+
+.wrapper {
+    width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 90;
+}
+
+.logo {
+    float: left;
+    width: 229px;
+    height: 43px;
+    background: url(../img/logo.png);
+}
+
+.nav {
+       
+}
+
+.nav ul{
+    float: left; 
+    list-style: none;
+    
+}
+
+.nav ul li {
+    float: left;
+    padding: 0 10px;
+}
+
+.nav ul li a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-decoration: none;
+    border-bottom: 3px #fafafa solid;
+}
+.nav ul li a:hover,.nav ul li a.active{
+    color: #000;
+    border-bottom-color: #019875;
+}
+
+ul.login {
+    float: right;
+    list-style:none;
+    background-color: #019875;
+}
+
+.login li {
+    float: left;
+    padding: 5px 0;
+    color: white;
+}
+
+.login li a {
+    padding: 0 10px;
+    color: white;
+}
+.login li a:hover{
+    color: white;
+}
+
+.container {
+    width: 1024px;
+    margin: 40px auto 0;
+}
+
+.menu {
+    float: left;
+    position: relative;
+}
+.menu li {
+    width:230px;
+}
+.main{
+    padding: 10px 15px;
+    width: 200px;
+    background-color: #fafafa;
+    border: 2px solid  #fafafa;
+    border-right: none;
+    position: relative;
+}
+.current .main{
+    border-color:#dadada;
+    background-color: #fff;
+    z-index: 101;
+}
+
+.main h2{
+    background: url(../img/arr.png) no-repeat 190px center transparent;
+}
+
+.main a {
+    margin: 5px;
+}
+.main a:hover{
+    text-decoration:underline;
+    color: #019875;
+}
+
+.detail {
+    display: none;
+    position: absolute;
+    top: 0px;
+    left:230px;
+    padding: 20px;
+    width: 500px;
+    border: 2px solid  #dadada;
+    z-index: 10;
+}
+.current .detail{
+    display: block;
+}
+.detail dt{
+    position: absolute;
+    width: 70px;
+}
+.detail dt a{
+    text-decoration: underline;
+}
+.detail dd{
+    margin-left: 100px;
+    height: 100px;
+    overflow: hidden;
+    
+}
+.detail dd a {
+    margin-left: -1px;
+/*    float: left;*/
+    padding:0 10px;
+    background: url(../img/arr.png) no-repeat -29px center ;
+    word-wrap:break-word;
+    word-break: keep-all;
+}.detail dd a:hover {
+    text-decoration: underline;
+}
+
+
+.content {
+    float: right;
+    width: 744px;
+}
+
+#search_select {
+    float: left;
+    width: 94px;
+    height: 37px;
+    border: none;
+    border-right: 2px solid #019875;
+    
+}
+
+#search_input {
+    float: left;
+    width: 476px;
+    height: 23px;
+    padding: 7px 8px 7px 10px;
+    border: 0 none;
+    
+}
+
+#search_submit {
+    color: #fff;
+    float: right;
+    width: 152px;
+    height: 37px;
+    background-color: #019875;
+    border: none;
+}
+
+.search {
+    border: 2px solid  #019875;
+    width: 740px;
+    height: 37px;
+}
+
+.hot dt {
+    float: left;
+}
+
+.hot dd {
+    float: left;
+    text-indent: 0;
+    margin: 0;
+}
+
+.hot {
+    overflow: hidden;
+}
+
+.slide{
+    float: left;
+    height: 480px;
+    position: relative;
+    top: -160px;
+}
+.slide li{
+    width: 612px;
+    height: 160px;
+}
+
+.banner {
+    overflow: hidden;
+    width: 744px;
+    height: 160px;
+    
+}
+
+.controller {
+    float: right;
+    position: relative;
+    width: 121px;
+    height: 160px;
+}
+
+
+
+li {
+    
+}
+
+.controller li, .controller li img{
+    width: 113px;
+    height: 42px;
+}
+.controller li{
+    border: 4px solid  #d3d3d3;
+    margin-bottom: 5px;
+    position: relative;
+}
+.controller li.last{
+    margin-bottom: 0;
+}
+
+.controller li span{
+    background: url(../img/thumb_cover.png);
+    width: 113px;
+    height: 42px;
+    position: absolute;
+}
+.controller li.current span{
+    background:none; 
+}
+
+.indicator {
+    position: absolute;
+    width: 127px;
+    height: 50px;
+    left: -6px;
+    top: 55px;
+    background: url(../img/control_current.png);
+    z-index: 10;
+}
