@@ -32,7 +32,7 @@ Harx.event.stopPropagation=function(event){
     if(event.stopPropagation){
         event.stopPropagation();
     }else{
-        event.cancelBubble=false;
+        event.cancelBubble=true;
     }
 };
 Harx.event.preventDefault=function(event){
