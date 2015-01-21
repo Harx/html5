@@ -101,4 +101,15 @@ Harx.event.mouse.getButton=function(event){
         }
     }
 };
-
+/**
+ * 兼容mouseWheel和DOMMouseScroll两个事件
+ * @param event
+ */
+Harx.event.mouse.getWheelDelta=function(event){
+    if(event.wheelDelta){
+        //return (client.engine.opera&&client.engine.opera<9.5?-event.wheelDelta:evetn.wheelDelta);
+        return event.wheelDelta;
+    }else{
+        return -event.detail*40;
+    }
+};
